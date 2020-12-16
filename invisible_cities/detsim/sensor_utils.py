@@ -11,14 +11,21 @@ from .. database.load_db   import           DataSiPM
 from .. io      .mcinfo_io import get_sensor_binning
 
 
-def create_timestamp(event_number: int or float,
-                     rate        : float       ) -> float:
+def create_timestamp(event_number: Union[int, float],
+                     rate        :            float ) -> float:
     """
     Calculates timestamp for a given Event Number and Rate.
 
-    :param event_number: Value of the current event.
-    :param rate: Value of the rate.
-    :return: Calculated timestamp
+    Parameters
+    ----------
+    event_number : Union[int, float]
+                   ID value of the current event.
+    rate         : float
+                   Value of the rate.
+
+    Returns
+    -------
+    Calculated timestamp : float
     """
     period = 1 / rate
     timestamp = abs(event_number * period) + np.random.uniform(0, period)
