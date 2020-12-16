@@ -358,6 +358,8 @@ def mcsensors_from_file(paths     : List[str],
                  Name of detector database to be used
     run_number : int
                  Run number for database
+    rate       : float
+                 Rate value in Hertz to generate timestamps
     """
 
     pmt_ids  = load_db.DataPMT(db_file, run_number).SensorID
@@ -370,7 +372,7 @@ def mcsensors_from_file(paths     : List[str],
 
         for evt in mcinfo_io.get_event_numbers_in_file(file_name):
 
-            timestamp = create_timestamp(evt, rate)
+            timestamp = create_timestamp(evt, rate) / units.ms
 
             try:
                 ## Assumes two types of sensor, all non pmt
